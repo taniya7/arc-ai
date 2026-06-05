@@ -4,15 +4,16 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Foundation / Design System
+- Editor Chrome
 
 ## Current Goal
 
-- Implement `01-design-system`: Install shadcn/ui, add primitive components, configure dark theme tokens.
+- None — `02-editor-chrome` completed.
 
 ## Completed
 
 - `01-design-system` — shadcn/ui installed with Button, Card, Dialog, Input, Tabs, Textarea, ScrollArea. `cn()` helper in `lib/utils.ts`. Dark-only theme in `globals.css`. `lucide-react` installed.
+- `02-editor-chrome` — Editor navbar with sidebar toggle (`PanelLeftOpen`/`PanelLeftClose`). Floating project sidebar with tabs (My Projects / Shared), empty placeholders, and New Project button. Dialog pattern verified (shadcn Dialog already uses project color tokens).
 
 ## In Progress
 
