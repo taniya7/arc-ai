@@ -4,17 +4,18 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Auth
+- Project Dialogs & Editor Home
 
 ## Current Goal
 
-- None — `03-auth` completed.
+- None — `04-project-dialogs` completed.
 
 ## Completed
 
 - `01-design-system` — shadcn/ui installed with Button, Card, Dialog, Input, Tabs, Textarea, ScrollArea. `cn()` helper in `lib/utils.ts`. Dark-only theme in `globals.css`. `lucide-react` installed.
 - `02-editor-chrome` — Editor navbar with sidebar toggle (`PanelLeftOpen`/`PanelLeftClose`). Floating project sidebar with tabs (My Projects / Shared), empty placeholders, and New Project button. Dialog pattern verified (shadcn Dialog already uses project color tokens).
 - `03-auth` — ClerkProvider with dark theme wrapping root layout. Sign-in/sign-up pages with two-panel layout. `proxy.ts` protected-first middleware. Home page redirects by auth state. `UserButton` in editor navbar.
+- `04-project-dialogs` — Editor home screen with heading/description/New Project button. Create/Rename/Delete project dialogs using shadcn Dialog. `useProjectDialogs` hook for dialog/form/loading state. Sidebar project items with owner-only actions menu (rename/delete). Mock project data. Live slug preview in create dialog.
 
 ## In Progress
 
