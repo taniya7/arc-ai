@@ -6,15 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import type { Project } from "@/hooks/use-project-dialogs";
+import type { ProjectItem } from "@/lib/projects";
 
 interface ProjectSidebarProps {
   isOpen: boolean;
   onClose: () => void;
-  projects: Project[];
+  projects: ProjectItem[];
   onNewProject: () => void;
-  onRename: (project: Project) => void;
-  onDelete: (project: Project) => void;
+  onRename: (project: ProjectItem) => void;
+  onDelete: (project: ProjectItem) => void;
 }
 
 // ---------- Project item with actions menu ----------
@@ -24,9 +24,9 @@ function ProjectItem({
   onRename,
   onDelete,
 }: {
-  project: Project;
-  onRename: (project: Project) => void;
-  onDelete: (project: Project) => void;
+  project: ProjectItem;
+  onRename: (project: ProjectItem) => void;
+  onDelete: (project: ProjectItem) => void;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -52,7 +52,7 @@ function ProjectItem({
           {project.name}
         </p>
         <p className="truncate text-xs text-muted-foreground">
-          {project.slug}
+          {project.id}
         </p>
       </div>
 
