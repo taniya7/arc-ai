@@ -4,11 +4,11 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Project Dialogs & Editor Home
+- Prisma Schema & Data Layer
 
 ## Current Goal
 
-- None — `04-project-dialogs` completed.
+- None — `05-prisma` completed.
 
 ## Completed
 
@@ -16,6 +16,7 @@ Update this file whenever the current phase, active feature, or implementation s
 - `02-editor-chrome` — Editor navbar with sidebar toggle (`PanelLeftOpen`/`PanelLeftClose`). Floating project sidebar with tabs (My Projects / Shared), empty placeholders, and New Project button. Dialog pattern verified (shadcn Dialog already uses project color tokens).
 - `03-auth` — ClerkProvider with dark theme wrapping root layout. Sign-in/sign-up pages with two-panel layout. `proxy.ts` protected-first middleware. Home page redirects by auth state. `UserButton` in editor navbar.
 - `04-project-dialogs` — Editor home screen with heading/description/New Project button. Create/Rename/Delete project dialogs using shadcn Dialog. `useProjectDialogs` hook for dialog/form/loading state. Sidebar project items with owner-only actions menu (rename/delete). Mock project data. Live slug preview in create dialog.
+- `05-prisma` — Prisma schema with Project and ProjectCollaborator models. `lib/prisma.ts` cached singleton branching Accelerate vs direct `@prisma/adapter-pg`. Initial migration applied.
 
 ## In Progress
 
