@@ -4,11 +4,11 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Prisma Schema & Data Layer
+- Wire Editor Home
 
 ## Current Goal
 
-- None — `05-prisma` completed.
+- None — `07-wire-editor-home` completed.
 
 ## Completed
 
@@ -17,6 +17,8 @@ Update this file whenever the current phase, active feature, or implementation s
 - `03-auth` — ClerkProvider with dark theme wrapping root layout. Sign-in/sign-up pages with two-panel layout. `proxy.ts` protected-first middleware. Home page redirects by auth state. `UserButton` in editor navbar.
 - `04-project-dialogs` — Editor home screen with heading/description/New Project button. Create/Rename/Delete project dialogs using shadcn Dialog. `useProjectDialogs` hook for dialog/form/loading state. Sidebar project items with owner-only actions menu (rename/delete). Mock project data. Live slug preview in create dialog.
 - `05-prisma` — Prisma schema with Project and ProjectCollaborator models. `lib/prisma.ts` cached singleton branching Accelerate vs direct `@prisma/adapter-pg`. Initial migration applied.
+- `06-project-apis` — REST endpoints: GET/POST `/api/projects`, PATCH/DELETE `/api/projects/[projectId]`. Clerk auth (401) and owner-only mutation guards (403).
+- `07-wire-editor-home` — Server-side data fetching for editor page. `useProjectActions` hook with real API mutations (create/rename/delete). Sidebar and dialogs wired to live data. Create navigates to workspace. Delete redirects if active.
 
 ## In Progress
 
