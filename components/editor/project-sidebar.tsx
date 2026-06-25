@@ -12,6 +12,7 @@ interface ProjectSidebarProps {
   isOpen: boolean;
   onClose: () => void;
   projects: ProjectItem[];
+  activeProjectId?: string;
   onNewProject: () => void;
   onRename: (project: ProjectItem) => void;
   onDelete: (project: ProjectItem) => void;
@@ -19,12 +20,14 @@ interface ProjectSidebarProps {
 
 // ---------- Project item with actions menu ----------
 
-function ProjectItem({
+function ProjectItemRow({
   project,
+  isActive,
   onRename,
   onDelete,
 }: {
   project: ProjectItem;
+  isActive?: boolean;
   onRename: (project: ProjectItem) => void;
   onDelete: (project: ProjectItem) => void;
 }) {
@@ -45,7 +48,10 @@ function ProjectItem({
 
   return (
     <div
-      className="group relative flex items-center gap-2 rounded-lg px-2.5 py-2 transition-colors hover:bg-muted"
+      className={cn(
+        "group relative flex items-center gap-2 rounded-lg px-2.5 py-2 transition-colors hover:bg-muted",
+        isActive && "bg-muted ring-1 ring-primary/40"
+      )}
     >
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-medium text-foreground">
@@ -110,6 +116,7 @@ export function ProjectSidebar({
   isOpen,
   onClose,
   projects,
+  activeProjectId,
   onNewProject,
   onRename,
   onDelete,
@@ -168,9 +175,10 @@ export function ProjectSidebar({
                 ) : (
                   <div className="flex flex-col gap-0.5 py-2">
                     {myProjects.map((project) => (
-                      <ProjectItem
+                      <ProjectItemRow
                         key={project.id}
                         project={project}
+                        isActive={project.id === activeProjectId}
                         onRename={onRename}
                         onDelete={onDelete}
                       />
@@ -189,9 +197,10 @@ export function ProjectSidebar({
                 ) : (
                   <div className="flex flex-col gap-0.5 py-2">
                     {sharedProjects.map((project) => (
-                      <ProjectItem
+                      <ProjectItemRow
                         key={project.id}
                         project={project}
+                        isActive={project.id === activeProjectId}
                         onRename={onRename}
                         onDelete={onDelete}
                       />

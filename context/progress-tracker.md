@@ -4,11 +4,11 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Wire Editor Home
+- Editor Workspace Shell
 
 ## Current Goal
 
-- None — `07-wire-editor-home` completed.
+- None — `09-share-dialog` completed.
 
 ## Completed
 
@@ -19,6 +19,8 @@ Update this file whenever the current phase, active feature, or implementation s
 - `05-prisma` — Prisma schema with Project and ProjectCollaborator models. `lib/prisma.ts` cached singleton branching Accelerate vs direct `@prisma/adapter-pg`. Initial migration applied.
 - `06-project-apis` — REST endpoints: GET/POST `/api/projects`, PATCH/DELETE `/api/projects/[projectId]`. Clerk auth (401) and owner-only mutation guards (403).
 - `07-wire-editor-home` — Server-side data fetching for editor page. `useProjectActions` hook with real API mutations (create/rename/delete). Sidebar and dialogs wired to live data. Create navigates to workspace. Delete redirects if active.
+- `08-editor-workspace-shell` — `/editor/[roomId]` server component with auth/access gates. `lib/project-access.ts` helpers. `AccessDenied` component. `WorkspaceShell` with navbar (project name, share, AI toggle), canvas placeholder, AI sidebar placeholder. Sidebar highlights active room.
+- `09-share-dialog` — Share dialog with owner invite/remove and collaborator read-only list. Clerk Backend API enrichment for names/avatars. Copy project link with "Copied!" feedback. REST endpoints: GET/POST `/api/projects/[projectId]/collaborators`, DELETE `/api/projects/[projectId]/collaborators/[collaboratorId]`. `useShareDialog` hook.
 
 ## In Progress
 
