@@ -21,6 +21,7 @@ import { useProjectActions } from "@/hooks/use-project-actions";
 import { useShareDialog } from "@/hooks/use-share-dialog";
 import { cn } from "@/lib/utils";
 import type { ProjectItem } from "@/lib/projects";
+import { CanvasWrapper } from "@/components/editor/canvas-wrapper";
 
 interface WorkspaceShellProps {
   projectId: string;
@@ -150,45 +151,9 @@ export function WorkspaceShell({
         {/* Canvas area */}
         <main
           id="canvas-area"
-          className="relative flex flex-1 items-center justify-center overflow-hidden bg-base"
+          className="relative flex flex-1 overflow-hidden bg-base"
         >
-          {/* Dot grid pattern */}
-          <div
-            className="pointer-events-none absolute inset-0 opacity-30"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle, var(--border-default) 1px, transparent 1px)",
-              backgroundSize: "24px 24px",
-            }}
-          />
-
-          {/* Subtle inner border effect */}
-          <div className="pointer-events-none absolute inset-3 rounded-xl border border-border/40" />
-
-          {/* Centered workspace message */}
-          <div className="relative z-10 flex max-w-md flex-col items-center gap-4 px-6 text-center">
-            {/* Icon badge */}
-            <div className="flex size-14 items-center justify-center rounded-full border border-brand/30 bg-brand/10">
-              <Link2 className="size-6 text-brand" />
-            </div>
-
-            {/* Label */}
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              Workspace Shell
-            </p>
-
-            {/* Heading */}
-            <h1 className="text-xl font-semibold leading-snug text-foreground sm:text-2xl">
-              Canvas and collaboration tooling land here next.
-            </h1>
-
-            {/* Description */}
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              This room is ready for the shared architecture canvas, durable AI
-              workflows, and real-time presence. For now, the shell is wired
-              with project context and navigation only.
-            </p>
-          </div>
+          <CanvasWrapper roomId={projectId} />
         </main>
 
         {/* ─── AI Sidebar (right) ─── */}
