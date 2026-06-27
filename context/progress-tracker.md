@@ -8,7 +8,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Goal
 
-- `12-shape-panel`
+- `15-node-color-toolbar`
 
 ## Completed
 
@@ -24,10 +24,13 @@ Update this file whenever the current phase, active feature, or implementation s
 - `10-liveblocks-setup` — Liveblocks config with Presence (cursor, isThinking) and UserMeta (name, avatar, cursorColor). Cached node client in `lib/liveblocks.ts` with deterministic cursor color helper. `POST /api/liveblocks-auth` route with Clerk auth, project access verification, room creation, and session token.
 
 - `11-base-canvas` — Created shared canvas types. Implemented Liveblocks room wrapper with suspense and error handling. Set up React Flow canvas synced to Liveblocks with dark theme mini map.
+- `12-shape-panel` — Added floating bottom shape toolbar with draggable shape payloads and drop-to-create canvas nodes using shared Liveblocks-backed React Flow state.
+- `13-node-shape` — Replaced placeholder nodes with shape-specific rendering for CSS and SVG variants. Added cursor-following drag ghost preview that matches the dropped shape size and stays within existing collaborative canvas flow.
+- `14-node-editing` — Added selected-node resize handles with minimum dimensions and inline centered label editing. Label edits sync live through the collaborative canvas state and editing interactions no longer drag or pan the canvas.
 
 ## In Progress
 
-- `12-shape-panel`
+- `15-node-color-toolbar`
 
 ## Next Up
 
@@ -43,4 +46,5 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Session Notes
 
-- Add context needed to resume work in the next session.
+- `13-node-shape` now uses a shared renderer for CSS and SVG node variants plus a drag ghost preview wired to the existing shape payload and Liveblocks-backed node creation flow.
+- `14-node-editing` uses React Flow's built-in node resizer for dimensions and a centered inline textarea editor guarded with `nodrag`/`nopan`/`nowheel` behavior for collaborative label updates.
