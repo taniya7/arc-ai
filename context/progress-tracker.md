@@ -8,7 +8,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Goal
 
-- None — `09-share-dialog` completed.
+- `12-shape-panel`
 
 ## Completed
 
@@ -21,10 +21,13 @@ Update this file whenever the current phase, active feature, or implementation s
 - `07-wire-editor-home` — Server-side data fetching for editor page. `useProjectActions` hook with real API mutations (create/rename/delete). Sidebar and dialogs wired to live data. Create navigates to workspace. Delete redirects if active.
 - `08-editor-workspace-shell` — `/editor/[roomId]` server component with auth/access gates. `lib/project-access.ts` helpers. `AccessDenied` component. `WorkspaceShell` with navbar (project name, share, AI toggle), canvas placeholder, AI sidebar placeholder. Sidebar highlights active room.
 - `09-share-dialog` — Share dialog with owner invite/remove and collaborator read-only list. Clerk Backend API enrichment for names/avatars. Copy project link with "Copied!" feedback. REST endpoints: GET/POST `/api/projects/[projectId]/collaborators`, DELETE `/api/projects/[projectId]/collaborators/[collaboratorId]`. `useShareDialog` hook.
+- `10-liveblocks-setup` — Liveblocks config with Presence (cursor, isThinking) and UserMeta (name, avatar, cursorColor). Cached node client in `lib/liveblocks.ts` with deterministic cursor color helper. `POST /api/liveblocks-auth` route with Clerk auth, project access verification, room creation, and session token.
+
+- `11-base-canvas` — Created shared canvas types. Implemented Liveblocks room wrapper with suspense and error handling. Set up React Flow canvas synced to Liveblocks with dark theme mini map.
 
 ## In Progress
 
-- None.
+- `12-shape-panel`
 
 ## Next Up
 
