@@ -43,5 +43,11 @@ export type CanvasNodeData = {
   shape?: ShapeType;
 };
 
+export const CANVAS_EDGE_TYPE = "canvasEdge";
+
+export type CanvasEdgeData = Record<string, unknown> & {
+  label?: string;
+};
+
 export type CanvasNode = Node<CanvasNodeData>;
-export type CanvasEdge = Edge;
+export type CanvasEdge = Edge<CanvasEdgeData, typeof CANVAS_EDGE_TYPE>;
