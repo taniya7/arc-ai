@@ -8,7 +8,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Goal
 
-- `15-node-color-toolbar`
+- Add the next planned feature unit here.
 
 ## Completed
 
@@ -27,10 +27,12 @@ Update this file whenever the current phase, active feature, or implementation s
 - `12-shape-panel` — Added floating bottom shape toolbar with draggable shape payloads and drop-to-create canvas nodes using shared Liveblocks-backed React Flow state.
 - `13-node-shape` — Replaced placeholder nodes with shape-specific rendering for CSS and SVG variants. Added cursor-following drag ghost preview that matches the dropped shape size and stays within existing collaborative canvas flow.
 - `14-node-editing` — Added selected-node resize handles with minimum dimensions and inline centered label editing. Label edits sync live through the collaborative canvas state and editing interactions no longer drag or pan the canvas.
+- `16-edge-behavior` — Added subtle four-side node handles, custom right-angle canvas edges with arrows and larger interaction paths, and inline edge label editing synced through the collaborative React Flow edge data path.
+- `17-canvas-ergonomics` — Added a bottom-left canvas control bar for zoom, fit view, undo, and redo. Wired viewport actions to React Flow, history actions to Liveblocks undo/redo hooks, and matching keyboard shortcuts through `hooks/useKeyboardShortcuts.ts`.
 
 ## In Progress
 
-- `15-node-color-toolbar`
+- None.
 
 ## Next Up
 
@@ -48,3 +50,5 @@ Update this file whenever the current phase, active feature, or implementation s
 
 - `13-node-shape` now uses a shared renderer for CSS and SVG node variants plus a drag ghost preview wired to the existing shape payload and Liveblocks-backed node creation flow.
 - `14-node-editing` uses React Flow's built-in node resizer for dimensions and a centered inline textarea editor guarded with `nodrag`/`nopan`/`nowheel` behavior for collaborative label updates.
+- `16-edge-behavior` uses a custom React Flow edge renderer with `EdgeLabelRenderer` and `getSmoothStepPath` label coordinates; label saves flow through `updateEdgeData`, which feeds the existing Liveblocks-backed edge change path.
+- `17-canvas-ergonomics` uses React Flow viewport methods with short animated transitions and Liveblocks `useUndo`/`useRedo` plus `useCanUndo`/`useCanRedo`; keyboard shortcuts skip inputs, textareas, selects, contenteditable fields, and textbox-role elements.

@@ -13,6 +13,12 @@ import {
 } from "@/types/canvas";
 
 const EMPTY_LABEL_PLACEHOLDER = "Untitled";
+const NODE_HANDLE_CLASS =
+  "!size-2.5 !border-2 opacity-0 transition-opacity duration-150 group-hover:opacity-100";
+const NODE_HANDLE_STYLE = {
+  backgroundColor: "var(--text-primary)",
+  borderColor: "var(--bg-base)",
+};
 
 interface FlowStorageNodeData {
   set: (key: "label" | "color" | "textColor", value: string) => void;
@@ -190,24 +196,32 @@ export function CanvasNodeComponent({
       />
 
       <Handle
-        type="target"
+        id="top"
+        type="source"
         position={Position.Top}
-        className="!size-3 !border-2 !border-copy-primary !bg-copy-primary opacity-0 transition-opacity group-hover:opacity-100"
+        className={NODE_HANDLE_CLASS}
+        style={NODE_HANDLE_STYLE}
       />
       <Handle
-        type="target"
-        position={Position.Left}
-        className="!size-3 !border-2 !border-copy-primary !bg-copy-primary opacity-0 transition-opacity group-hover:opacity-100"
-      />
-      <Handle
+        id="right"
         type="source"
         position={Position.Right}
-        className="!size-3 !border-2 !border-copy-primary !bg-copy-primary opacity-0 transition-opacity group-hover:opacity-100"
+        className={NODE_HANDLE_CLASS}
+        style={NODE_HANDLE_STYLE}
       />
       <Handle
+        id="bottom"
         type="source"
         position={Position.Bottom}
-        className="!size-3 !border-2 !border-copy-primary !bg-copy-primary opacity-0 transition-opacity group-hover:opacity-100"
+        className={NODE_HANDLE_CLASS}
+        style={NODE_HANDLE_STYLE}
+      />
+      <Handle
+        id="left"
+        type="source"
+        position={Position.Left}
+        className={NODE_HANDLE_CLASS}
+        style={NODE_HANDLE_STYLE}
       />
 
       <NodeShape
