@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   useCanRedo,
   useCanUndo,
@@ -18,6 +18,8 @@ import {
   Panel,
   useReactFlow,
   type Connection,
+  type EdgeChange,
+  type NodeChange,
 } from "@xyflow/react";
 import {
   Maximize2,
@@ -32,6 +34,7 @@ import { ShapePanel } from "./shape-panel";
 import { CanvasNodeComponent } from "./canvas-node";
 import { CanvasEdgeComponent } from "./canvas-edge";
 import { NodeShape } from "./node-shape";
+import type { TemplateImportRequest } from "./canvas-wrapper";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 import { cn } from "@/lib/utils";
 import {
@@ -95,7 +98,13 @@ interface DragPreview {
   height: number;
 }
 
-export function CollaborativeCanvas() {
+interface CollaborativeCanvasProps {
+  templateImportRequest: TemplateImportRequest | null;
+}
+
+export function CollaborativeCanvas({
+  templateImportRequest,
+}: CollaborativeCanvasProps) {
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect, onDelete } =
     useLiveblocksFlow<CanvasNode, CanvasEdge>({ suspense: true });
 
@@ -106,6 +115,7 @@ export function CollaborativeCanvas() {
   const canRedo = useCanRedo();
   const [dragPreview, setDragPreview] = useState<DragPreview | null>(null);
   const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
+  const lastImportRequestIdRef = useRef<number | null>(null);
 
   const zoomOut = useCallback(() => {
     void reactFlow.zoomOut({ duration: VIEWPORT_ANIMATION_MS });
@@ -136,6 +146,53 @@ export function CollaborativeCanvas() {
     undo: handleUndo,
     redo: handleRedo,
   });
+
+  useEffect(() => {
+    if (!templateImportRequest) return;
+    if (lastImportRequestIdRef.current === templateImportRequest.requestId) {
+      return;
+    }
+
+    lastImportRequestIdRef.current = templateImportRequest.requestId;
+
+    onDelete({ nodes, edges });
+
+    const nodeChanges: NodeChange<CanvasNode>[] =
+      templateImportRequest.template.nodes.map((node, index) => ({
+        type: "add",
+        item: { ...node, selected: false },
+        index,
+      }));
+    const edgeChanges: EdgeChange<CanvasEdge>[] =
+      templateImportRequest.template.edges.map((edge, index) => ({
+        type: "add",
+        item: { ...edge, selected: false },
+        index,
+      }));
+
+    onNodesChange(nodeChanges);
+    onEdgesChange(edgeChanges);
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        void reactFlow.fitView({
+          duration: VIEWPORT_ANIMATION_MS,
+          padding: 0.2,
+          nodes: templateImportRequest.template.nodes.map((node) => ({
+            id: node.id,
+          })),
+        });
+      });
+    });
+  }, [
+    edges,
+    nodes,
+    onDelete,
+    onEdgesChange,
+    onNodesChange,
+    reactFlow,
+    templateImportRequest,
+  ]);
 
   useEffect(() => {
     if (!dragPreview) return;

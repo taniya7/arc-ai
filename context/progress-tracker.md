@@ -29,6 +29,7 @@ Update this file whenever the current phase, active feature, or implementation s
 - `14-node-editing` — Added selected-node resize handles with minimum dimensions and inline centered label editing. Label edits sync live through the collaborative canvas state and editing interactions no longer drag or pan the canvas.
 - `16-edge-behavior` — Added subtle four-side node handles, custom right-angle canvas edges with arrows and larger interaction paths, and inline edge label editing synced through the collaborative React Flow edge data path.
 - `17-canvas-ergonomics` — Added a bottom-left canvas control bar for zoom, fit view, undo, and redo. Wired viewport actions to React Flow, history actions to Liveblocks undo/redo hooks, and matching keyboard shortcuts through `hooks/useKeyboardShortcuts.ts`.
+- `18-starter-templates` — Added predefined canvas template data, a starter templates modal with lightweight diagram previews, a navbar entry point, and replacement imports through the Liveblocks-backed canvas state.
 
 ## In Progress
 
@@ -52,3 +53,4 @@ Update this file whenever the current phase, active feature, or implementation s
 - `14-node-editing` uses React Flow's built-in node resizer for dimensions and a centered inline textarea editor guarded with `nodrag`/`nopan`/`nowheel` behavior for collaborative label updates.
 - `16-edge-behavior` uses a custom React Flow edge renderer with `EdgeLabelRenderer` and `getSmoothStepPath` label coordinates; label saves flow through `updateEdgeData`, which feeds the existing Liveblocks-backed edge change path.
 - `17-canvas-ergonomics` uses React Flow viewport methods with short animated transitions and Liveblocks `useUndo`/`useRedo` plus `useCanUndo`/`useCanRedo`; keyboard shortcuts skip inputs, textareas, selects, contenteditable fields, and textbox-role elements.
+- `18-starter-templates` imports call Liveblocks React Flow `onDelete` to clear current storage before adding template nodes/edges, because remove changes are not applied by the Liveblocks flow adapter.
