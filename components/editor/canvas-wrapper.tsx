@@ -8,9 +8,16 @@ import {
 import { ClientSideSuspense } from "@liveblocks/react";
 import { ReactFlowProvider } from "@xyflow/react";
 import { CollaborativeCanvas } from "./canvas";
+import type { CanvasTemplate } from "./starter-templates";
+
+export interface TemplateImportRequest {
+  requestId: number;
+  template: CanvasTemplate;
+}
 
 interface CanvasWrapperProps {
   roomId: string;
+  templateImportRequest: TemplateImportRequest | null;
 }
 
 class CanvasErrorBoundary extends Component<
@@ -44,7 +51,10 @@ class CanvasErrorBoundary extends Component<
   }
 }
 
-export function CanvasWrapper({ roomId }: CanvasWrapperProps) {
+export function CanvasWrapper({
+  roomId,
+  templateImportRequest,
+}: CanvasWrapperProps) {
   return (
     <LiveblocksProvider authEndpoint="/api/liveblocks-auth">
       <CanvasErrorBoundary>
@@ -60,7 +70,9 @@ export function CanvasWrapper({ roomId }: CanvasWrapperProps) {
               }
             >
               <ReactFlowProvider>
-                <CollaborativeCanvas />
+                <CollaborativeCanvas
+                  templateImportRequest={templateImportRequest}
+                />
               </ReactFlowProvider>
             </ClientSideSuspense>
         </RoomProvider>

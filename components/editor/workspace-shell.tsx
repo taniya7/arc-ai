@@ -6,8 +6,8 @@ import {
   PanelLeftClose,
   Share2,
   Sparkles,
-  Link2,
   Layout,
+  LayoutTemplate,
   Bot,
 } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
@@ -21,7 +21,12 @@ import { useProjectActions } from "@/hooks/use-project-actions";
 import { useShareDialog } from "@/hooks/use-share-dialog";
 import { cn } from "@/lib/utils";
 import type { ProjectItem } from "@/lib/projects";
-import { CanvasWrapper } from "@/components/editor/canvas-wrapper";
+import {
+  CanvasWrapper,
+  type TemplateImportRequest,
+} from "@/components/editor/canvas-wrapper";
+import { StarterTemplatesModal } from "@/components/editor/starter-templates-modal";
+import type { CanvasTemplate } from "@/components/editor/starter-templates";
 
 interface WorkspaceShellProps {
   projectId: string;
@@ -40,6 +45,9 @@ export function WorkspaceShell({
 }: WorkspaceShellProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [aiSidebarOpen, setAiSidebarOpen] = useState(true);
+  const [templatesOpen, setTemplatesOpen] = useState(false);
+  const [templateImportRequest, setTemplateImportRequest] =
+    useState<TemplateImportRequest | null>(null);
 
   const {
     dialogState,
@@ -59,6 +67,13 @@ export function WorkspaceShell({
   const shareDialog = useShareDialog(projectId);
 
   const allProjects: ProjectItem[] = [...ownedProjects, ...sharedProjects];
+
+  const handleTemplateImport = (template: CanvasTemplate) => {
+    setTemplateImportRequest((current) => ({
+      requestId: (current?.requestId ?? 0) + 1,
+      template,
+    }));
+  };
 
   return (
     <div className="flex h-screen flex-col bg-background">
@@ -103,6 +118,17 @@ export function WorkspaceShell({
 
         {/* Right section — actions */}
         <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            aria-label="Open starter templates"
+            className="gap-1.5"
+            onClick={() => setTemplatesOpen(true)}
+          >
+            <LayoutTemplate className="size-3.5" />
+            Templates
+          </Button>
+
           {/* Share button (outline style with label) */}
           <Button
             variant="outline"
@@ -153,7 +179,10 @@ export function WorkspaceShell({
           id="canvas-area"
           className="relative flex flex-1 overflow-hidden bg-base"
         >
-          <CanvasWrapper roomId={projectId} />
+          <CanvasWrapper
+            roomId={projectId}
+            templateImportRequest={templateImportRequest}
+          />
         </main>
 
         {/* ─── AI Sidebar (right) ─── */}
@@ -214,6 +243,12 @@ export function WorkspaceShell({
       </div>
 
       {/* ─── Dialogs ─── */}
+
+      <StarterTemplatesModal
+        open={templatesOpen}
+        onOpenChange={setTemplatesOpen}
+        onImport={handleTemplateImport}
+      />
 
       <CreateProjectDialog
         open={dialogState.type === "create"}
